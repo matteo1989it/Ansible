@@ -1,0 +1,21 @@
+#Create tmp directories
+- name: Create tmp/docker directory for each Dockerfile
+  file:
+    path: "/tmp/docker/{{ item }}"
+    state: directory
+    mode: '0755'
+  loop: ['git', 'maven', 'sonarqube', 'nexus']
+#Copy image
+- name: Copy Dockerfiles to tmp directory
+  copy: 
+    src: "{{ role_path }}/files/{{ item }}/Dockerfile"
+    dest: "/tmp/docker/{{ item }}/Dockerfile"
+  loop: [ 'git' , 'maven' ]
+#Build images
+- name: Build from Dockerfile and push to local registry
+  command: "docker build /tmp -t localhost:5000/{{ item }}"
+  loop: [ 'git' , 'maven' ]
+#Push
+- name: "Push images to local repo"
+  command: "docker push localhost:5000/{{ item }}"
+  loop: [ 'git' , 'maven' ]

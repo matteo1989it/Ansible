@@ -1,0 +1,51 @@
+### Installed through Ansible - Without Blue Ocean and DOcker #####
+
+#
+#- name: Installation Java 8
+#  apt: update_cache=yes name=openjdk-8-jdk state=present
+#
+#- name: Ajout cle repo Jenkins
+#  apt_key:
+#    url: "https://pkg.jenkins.io/debian/jenkins-ci.org.key"
+#    state: present
+#
+#- name: Ajout repository Jenkins
+#  apt_repository:
+#    repo: deb http://pkg.jenkins.io/debian-stable binary/
+#    state: present
+#
+#- name: Installation Jenkins package
+#  apt: update_cache=yes name=jenkins state=latest
+#
+#
+#- name: Attente de Jenkins pour demarrer (peut etre long...)
+#  wait_for: timeout=40
+#
+#- name: Reprise du mot de passe Jenkins
+#  shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+#  changed_when: false
+#  register: result
+#
+#- name: Affichage du mot de passe pour "Unlock Jenkins"
+#  debug:
+#    var: result.stdout
+
+# Installed through a modified version of the docker-compose file inside the Git repo
+
+- name: Clone the repo Git
+  shell: git clone https://github.com/JITSEC/ProjectFinal_1.git
+
+- name: Cleaning old installation
+  shell: rm -R project/
+  ignore_errors: yes
+
+- name: Renaming the folder for easy access
+  shell: mv ProjectFinal_1 project
+  
+- name: Replacing docker-compose file
+  copy: 
+    src: "{{ role_path }}/files/docker-compose.yml"
+    dest: "project/docker-compose.yml"
+    
+- name: Launching the container
+  shell: cd project && docker-compose up -d 

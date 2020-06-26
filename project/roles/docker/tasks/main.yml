@@ -1,0 +1,24 @@
+- name: Ajout paquets systeme
+  apt: name={{ item }} state=latest update_cache=yes
+  loop: [ 'software-properties-common', 'python-pip' , 'apt-transport-https', 'ca-certificates', 'curl', 'python3-setuptools', 'python3-pip', 'virtualenv' ]
+
+- name: Ajout Cle Repo Docker
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Ajout repository Docker
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+
+- name: Update apt and install docker-ce
+  apt: update_cache=yes name=docker-ce state=latest
+
+- name: Installation Module Docker pour Python (pour aller plus loin..)
+  pip:
+    name: docker
+    
+- name: Installation docker-compose
+  apt: name=docker-compose state=latest update-cache=yes
+

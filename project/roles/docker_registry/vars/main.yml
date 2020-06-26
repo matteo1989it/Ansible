@@ -1,0 +1,8 @@
+---
+
+docker:
+  registry:
+    port: "443"
+    home: "/var/lib/docker-registry"
+    users: "[]"
+

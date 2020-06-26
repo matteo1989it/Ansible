@@ -1,0 +1,13 @@
+[jenkins_host]
+ec2-35-180-40-9.eu-west-3.compute.amazonaws.com ansible_user=root
+[mysql_host]
+ec2-15-188-89-253.eu-west-3.compute.amazonaws.com ansible_user=root
+[sonarqube_host]
+ec2-15-236-210-5.eu-west-3.compute.amazonaws.com ansible_user=root
+[nexus_host]
+ec2-15-236-186-54.eu-west-3.compute.amazonaws.com ansible_user=root
+[docker_host]
+ec2-15-188-89-253.eu-west-3.compute.amazonaws.com ansible_user=root
+ec2-15-236-210-5.eu-west-3.compute.amazonaws.com ansible_user=root
+ec2-15-236-186-54.eu-west-3.compute.amazonaws.com ansible_user=root
+ec2-35-180-40-9.eu-west-3.compute.amazonaws.com ansible_user=root

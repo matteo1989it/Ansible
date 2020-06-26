@@ -1,0 +1,40 @@
+---
+# Check Docker
+
+- name: Check docker version
+  shell: docker --version
+  register: docker_version
+
+# Install prerequisites
+- name: Install easy_install, python-dev package
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600
+  loop: [ 'python-dev', 'python-setuptools' ] #easy_install
+
+# Install and run docker registry
+- stat: path={{docker.registry.home}}
+  register: docker_registry_storage
+
+- name: Prepare Docker Registry Storage
+  file:
+    path: "{{docker.registry.home}}"
+    state: directory
+    mode: 750
+  when: not docker_registry_storage.stat.exists #may already exist as a symbolic link
+
+- name: stop previous docker registry
+  command: "docker kill registry"
+  ignore_errors: yes
+
+- name: remove previous docker registry
+  command: "docker rm registry"
+  ignore_errors: yes
+
+- name: ensure Docker Registry is running
+  command: "docker run -d -p 5000:5000 --net=bridge --restart=always --name registry registry:2"
+  register: start_registry
+
+

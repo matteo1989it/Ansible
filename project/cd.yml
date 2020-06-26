@@ -1,0 +1,24 @@
+#- hosts: docker_host
+#  roles:
+#    - docker
+
+#- hosts: docker_host
+#  roles:
+#    - docker_registry
+
+#- hosts: docker_host
+#  roles:
+#    - registry
+
+#- hosts: java_group
+#  roles:
+#    - java
+
+#- hosts: mysql_host
+#  roles:
+#    - mysql
+    
+- hosts: jenkins_host
+  roles:
+    - jenkins
+#    - ansible
