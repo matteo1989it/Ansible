@@ -1,6 +1,6 @@
-This exercice tries to provide one possible way to set up the Continuous Integration, Delivery or Deployment pipeline with Jenkins, Docker and Ansible. Two servers will be needed. One will be used as a Jenkins server and the other one as an imitation of production servers. First one will checkout, test and build applications while perform deployment and post-deployment tests.
+This exercise tries to provide one possible way to set up the Continuous Integration, Delivery or Deployment pipeline with Jenkins, Docker and Ansible. Two servers will be needed. One will be used as a Jenkins server and the other one as an imitation of production servers. First one will checkout, test and build applications while perform deployment and post-deployment tests.
 
-Git needs to be installed. The rest of the tools will be set up as part of the exercises in this article.
+Git needs to be installed. The rest of the tools will be set up as part of the exercises.
 
 Exercice Objectives :
 * **Step 1 - CI/CD Environment** : Auto Installation of Jenkins in a Virtual Machine (not a docker container). 
